@@ -1,0 +1,142 @@
+<style type="text/css">
+ .root{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   background-color: #dfe6e9;
+   padding: 20px;
+ }
+ .myframe{
+   width:600px;
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 10px;
+  }
+   .gap{
+     margin-top: 10px;
+ }
+ .btnstyle{
+  display:flex; justify-content:center; align-items:center; widht:20px;
+ }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Material Management</title>
+</head>
+<body>
+<div class="root">
+   <div class="myframe">
+     <div class="row" style=" display:flex;align-items:center;font-size:14px;letter-spacing:2px;font-weight: bold; padding-left: 20px;margin-bottom: 10px;">
+               <img src="/static/AMD.jpg" width="30">
+               List of AMD Product
+           </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th >#</th>
+      <th>Categoryid</th>
+      <th >Categoryname</th>
+      <th >icon</th>
+        <th>update</th>
+    </tr>
+  </thead>
+  <tbody>
+     {%  for row in rows %}
+     <tr>
+      <th scope="row">{{ row.0 }}</th>
+        <th>{{row.0}}</th>
+       <th>{{row.1}}</th>
+      <td><a href="/EditCategoryIcon?categoryid={{row.0}}&categoryname={{row.1}}&icon={{row.2}}"><img src="/static/{{row.2}}" width="50" /></a></td>
+      <td><a class = "button is-primary modal-button" data="{{row}}" data-target = "#modal" >Edit/Delete</a></td>
+    </tr>
+
+     {% endfor %}
+  </tbody>
+</table>
+ </div>
+</div>
+ <div id="modal" class="modal">
+     <div class = "modal-background"></div>
+      <div class="modal-content"style="background-color: #dfe6e9;border-radius: 10px; width:600px; background: #FFF;">
+      <div id="val">
+      	 <form action="/EditDeleteCategory">
+      <input type="hidden" id="categoryid" name="categoryid" />
+  <div class="root">
+   <div class="myframe">
+       <div class="row" style=" display:flex;align-items:center;font-size:14px;letter-spacing:4px;font-weight: bold; padding-left: 25px;margin-bottom: 10px;">
+               Category
+           </div>
+           <div class="row">
+             <div class="col">
+                <input type="text" id="categoryname" name="categoryname"  class="form-control" placeholder="categoryname">
+              </div>
+             </div>
+           <div class="row gap">
+              <div class="col">
+               <img  id="picture" name="icon" width="40">
+              </div>
+           </div>
+       <div class="row gap">
+              <div class="col btnstyle" >
+           <button type="submit" name="btn" value="Edit" class="btn btn-primary w-100" >Edit</button>
+
+                  </div>
+
+              <div class="col btnstyle" >
+            <button type="submit" name="btn" value="Delete" class="btn btn-primary w-100">Delete</button>
+                  </div>
+       </div>
+
+        <div class="row gap">
+              <div class="col btnstyle" style="font-size: 18px;font-weight:bold;">
+                        {{msg}}
+              </div>
+            </div>
+
+
+   </div>
+  </div>
+</form>
+
+      </div>
+
+  </div>
+  <button class = "modal-close is-large" aria-label = "close"></button>
+  </div>
+
+      <script>
+      function setDATA(data)
+      {
+             data=data.replace("(","")
+            data=data.replace(")","")
+            data=data.replaceAll("'","")
+            data=data.split(",")
+         return data
+      }
+         $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            var data=$(this).attr('data')
+                 data=setDATA(data)
+            $('#categoryid').val(data[0].trim())
+            $('#categoryname').val(data[1].trim())
+            $('#picture').attr('src','/static/'+(data[2].trim()))
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+      </script>
+</body>
+</html>
+</html>

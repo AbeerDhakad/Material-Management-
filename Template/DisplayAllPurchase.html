@@ -1,0 +1,195 @@
+<style type="text/css" xmlns="http://www.w3.org/1999/html">
+ .root{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   background-color: #dfe6e9;
+   padding: 20px;
+ }
+ .myframe{
+   width:1100px;
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 10px;
+  }
+   .gap{
+     margin-top: 10px;
+ }
+ .btnstyle{
+  display:flex; justify-content:center; align-items:center; widht:20px;
+ }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="/static/javascript/purchase.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Material Management</title>
+</head>
+<body style="background-color: #dfe6e9;">
+<div class="root">
+<div class="myframe">
+    <div class="row" style="display:flex;align-items:center;font-size:14px;letter-spacing:2px;font-weight: bold;padding-left:20px;margin-bottom:10px;">
+       <img src="/static/employee.png" width="30">
+        <b>List of supplier</b>
+    </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th >transaction id</th>
+      <th>category id</th>
+      <th>subcategory id </th>
+      <th >product id</th>
+        <th>final product id</th>
+        <th>dateofpurchase</th>
+        <th>supplierid</th>
+        <th>stock</th>
+      <th>amount</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for row in rows %}
+ <tr>
+      <th scope="row">{{row.0}}</th>
+      <td>{{row.1}}</td>
+      <td>{{row.2}}</td>
+   <td>{{row.3}}</td>
+   <td>{{row.4}}</td>
+   <td>{{row.5}}</td>
+    <td>{{row.6}}</td>
+<td>{{row.7}}</td>
+   <td>{{row.8}}</td>
+     <td><a class = "button is-primary modal-button" data="{{row}}" data-target = "#modal" >Edit/Delete</a></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+
+<div id="modal" class="modal">
+     <div class = "modal-background"></div>
+      <div class="modal-content"style="background-color: #dfe6e9;border-radius: 10px; width:600px; background: #FFF;">
+      <div id="val">
+
+      <input type="hidden" id="transactionid" name="transactionid" />
+  <div class="root">
+   <div class="myframe">
+       <div class="row" style=" display:flex;align-items:center;font-size:14px;letter-spacing:4px;font-weight: bold; padding-left: 25px;margin-bottom: 10px;">
+               Supplier
+           </div>
+                 <div class="row">
+                    <div class="col">
+                     <select id="employeeid" name="employeeid" class="form-control" >
+                 <option>-EmployeeId-</option>
+                 </select>
+              </div>
+             <div class="col">
+                     <select id="categoryid" name="categoryid" class="form-control" >
+                 <option>-Catoryid-</option>
+                 </select>
+              </div>
+
+           <div class="col">
+                 <select id="subcategoryid" name="subategoryid" class="form-control" >
+                 <option>-SubCatoryid-</option>
+                 </select>
+           </div>
+
+           <div class="col">
+                 <select id="Productid" name="Productid" class="form-control" >
+                 <option>-Productid-</option>
+                 </select>
+              </div>
+                   <div class="col">
+                 <select id="FinalProductid" name="FinalProductid" class="form-control" >
+                 <option>-FinalProductid-</option>
+                 </select>
+              </div>
+                 </div>
+
+      <div class="row gap">
+          <div class="col">
+              <input type="text" id="dateofpurchase" name="dateofpurchase" class="form-control" placeholder="dateofpurchase">
+          </div>
+
+          <div class="col">
+                <select id="supplierid" name="suppleirid" class="form-control" >
+                 <option>-SupplierId-</option>
+                 </select>
+          </div>
+
+          <div class="col">
+              <input type="text" id="stock" name="stock" class="form-control" placeholder="stock">
+          </div>
+
+          <div class="col">
+              <input type="text" id="amount" name="amount" class="form-control" placeholder="amount">
+          </div>
+      </div>
+       <div class="row gap">
+              <div class="col btnstyle" >
+           <button type="submit" name="btn" value="Edit" class="btn btn-primary w-100" >Edit</button>
+
+                  </div>
+
+              <div class="col btnstyle" >
+            <button type="submit" name="btn" value="Delete" class="btn btn-primary w-100">Delete</button>
+                  </div>
+       </div>
+
+        <div class="row gap">
+              <div class="col btnstyle" style="font-size: 18px;font-weight:bold;">
+                        {{msg}}
+              </div>
+            </div>
+
+</div>
+</div>
+
+
+</div>
+  </div>
+  <button class = "modal-close is-large" aria-label = "close"></button>
+</div>
+
+      <script>
+      function setDATA(data)
+      {
+             data=data.replace("(","")
+            data=data.replace(")","")
+            data=data.replaceAll("'","")
+            data=data.split(",")
+         return data
+      }
+         $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            var data=$(this).attr('data')
+                 data=setDATA(data)
+             $('#transactionid').val(data[0].trim())
+            $('#categoryid').val(data[1].trim())
+            $('#subcategoryid').val(data[2].trim())
+            $('#productid').val(data[3].trim())
+            $('#finalproductid').val(data[4].trim())
+            $('#dateofpurchase').val(data[5].trim())
+            $('#supplierid').val(data[6].trim())
+            $('#stock').val(data[7].trim())
+            $('#amount').val(data[8].trim())
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+      </script>
+</body>
+</html>
+</html>

@@ -1,0 +1,68 @@
+<style type="text/css">
+.root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dfe6e9;
+    padding: 20px;
+}
+.myframe{
+     width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius:10px;
+}
+.gap{
+margin-top: 10px;
+}
+.btnstyle{
+display: flex;justify-content:center;align-items:center;
+}
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Display SubCategory By ID</title>
+</head>
+<body style="background:#dfe6e9;">
+<form action="/EditDeleteSubCategory">
+  <input type="hidden" name="subcategoryid" value="{{row.1}}"/>
+    <div class="root">
+        <div class="myframe">
+        <div class="row" style="display: flex;align-item: center;font-size:15px;padding-left:15px;margin-bottom:10px;letter-spacing:2px;font-weight:bold">
+        Subategory
+        </div>
+        <div class="row">
+        <div class="col">
+            <input type="text" name="subcategoryname" class="form-control" value="{{row.2}}">
+        </div>
+    </div>
+         <div class="row gap">
+        <div class="col">
+            <input type="text" name="description" class="form-control" value="{{row.3}}">
+        </div>
+        </div>
+             <div class="row gap">
+        <div class="col" style="display:flex; align-item:center;justify-content: center;">
+             &nbsp;<image src="/static/{{row.4}}" id="pic" width="100"/>
+        </div>
+    </div>
+            <div class="row gap">
+        <div class="col btnstyle">
+            <button type="submit" name="btn" value="Edit"  class="btn btn-primary w-100">Save</button>
+        </div>
+            </div>
+           <div class="row gap">
+        <div class="col btnstyle">
+            <button type="submit" name="btn" value="Delete" class="btn btn-primary w-100">Delete</button>
+        </div>
+        </div>
+        </div>
+</form>
+</body>
+</html>

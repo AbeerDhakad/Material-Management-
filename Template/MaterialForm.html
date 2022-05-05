@@ -1,0 +1,124 @@
+<style type="text/css">
+ .root{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   background-color: #dfe6e9;
+   padding: 20px;
+ }
+ .myframe{
+   width:700px;
+   background-color: #fff;
+   padding: 30px;
+   border-radius: 10px;
+  }
+ .gap{
+     margin-top: 10px;
+ }
+ .btnstyle{
+  display:flex; justify-content:center; align-items:center; widht:20px;
+ }
+ </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/javascript/project.js"></script>
+    <meta charset="UTF-8">
+    <title>Material Management</title>
+</head>
+<body style="background:#dfe6e9">
+<form action="/employeesubmit" method="post"enctype="multipart/form-data" > {% csrf_token %}
+  <div class="root">
+   <div class="myframe">
+           <div class="row" style=" display:flex;align-items:center;font-size:14px;letter-spacing:2px;font-weight: bold; padding-left: 20px;margin-bottom: 10px;">
+               <img src="/static/raw.png" width="30">
+               Material
+           </div>
+         <div class="row">
+              <div class="col">
+                 <Select id="categoryid" name="categoryid" class="form-control">
+                <option>-Select Category-</option>
+            </Select>
+              </div>
+
+             <div class="col">
+                 <Select id="subcategoryid" name="subcategoryid" class="form-control">
+                <option>-Select SubCategory-</option>
+            </Select>
+              </div>
+
+
+             <div class="col">
+                 <Select id="productid" name="productid" class="form-control">
+                <option>-Select Product-</option>
+            </Select>
+              </div>
+
+         </div>
+
+          <div class="row gap">
+              <div class="col" style="display: flex; justify-content: center;align-items: center;">
+                <input type="text"    placeholder="productname" class="form-control" name="productname" style="margin-left: 10px;margin-right: 15px; font-size: 20px;" >
+              </div>
+
+             <div class="col">
+                 <input type="text" name="size " class="form-control" id="size" placeholder="size" >
+              </div>
+
+             <div class="col">
+                 <select name="size unit " class="form-control" id="sizeunit" placeholder="sizeunit" >
+                 <option>-size unit-</option>
+                 </select>
+              </div>
+              <div class="col">
+                 <input type="text" name="color" class="form-control" id="color" placeholder="color" >
+              </div>
+
+         </div>
+
+       <div class="row gap">
+           <div class="col">
+               <input type="text" name="weight" class="form-control" placeholder="weight"  style="margin-left: 10px;margin-right: 15px; font-size: 20px;">
+           </div>
+           <div class="col">
+               <input type="text" name="price" class="form-control" placeholder="price">
+           </div>
+       </div>
+           <div class="row gap">
+             <div class="col btnstyle">
+                <input type="file" name="picture" accept="image/*" id="picture" class="form-control" placeholder="Picture">
+                 &nbsp;<img src="/static/noimage.png" id="pic" width="40"/>
+              </div>
+           </div>
+
+ <div class="row gap">
+              <div class="col btnstyle" >
+           <button type="submit" class="btn btn-primary w-100" >Save</button>
+
+                  </div>
+
+              <div class="col btnstyle" >
+            <button type="reset" class="btn btn-primary w-100">Reset</button>
+                  </div>
+       </div>
+
+        <div class="row gap">
+              <div class="col btnstyle" style="font-size: 18px;font-weight:bold;">
+                        {{msg}}
+              </div>
+        </div>
+   </div>
+  </div>
+
+    </form>
+</body>
+</html>
+
+
+</body>
+</html>

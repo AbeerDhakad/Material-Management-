@@ -1,0 +1,171 @@
+<style type="text/css" xmlns="http://www.w3.org/1999/html">
+ .root{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   background-color: #dfe6e9;
+   padding: 20px;
+ }
+ .myframe{
+   width:1100px;
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 10px;
+  }
+   .gap{
+     margin-top: 10px;
+ }
+ .btnstyle{
+  display:flex; justify-content:center; align-items:center; widht:20px;
+ }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="/static/javascript/supplier.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Material Management</title>
+</head>
+<body style="background-color: #dfe6e9;">
+<div class="root">
+<div class="myframe">
+    <div class="row" style="display:flex;align-items:center;font-size:14px;letter-spacing:2px;font-weight: bold;padding-left:20px;margin-bottom:10px;">
+       <img src="/static/employee.png" width="30">
+        <b>List of supplier</b>
+    </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th >supplier id</th>
+      <th>Supplier Name</th>
+      <th>LandlineNumber </th>
+      <th >Mobile Number</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>State</th>
+        <th>City</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for row in rows %}
+ <tr>
+      <th scope="row">{{row.0}}</th>
+      <td>{{row.1}}</td>
+      <td>{{row.2}}</td>
+   <td>{{row.4}}</td>
+   <td>{{row.5}}</td>
+    <td>{{row.6}}</td>
+<td>{{row.7}}</td>
+     <td><a class = "button is-primary modal-button" data="{{row}}" data-target = "#modal" >Edit/Delete</a></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+
+<div id="modal" class="modal">
+     <div class = "modal-background"></div>
+      <div class="modal-content"style="background-color: #dfe6e9;border-radius: 10px; width:600px; background: #FFF;">
+      <div id="val">
+      	 <form action="/EditDeletesupplier">
+      <input type="hidden" id="supplierid" name="supplierid" />
+  <div class="root">
+   <div class="myframe">
+       <div class="row" style=" display:flex;align-items:center;font-size:14px;letter-spacing:4px;font-weight: bold; padding-left: 25px;margin-bottom: 10px;">
+               Supplier
+           </div>
+           <div class="row">
+             <div class="col">
+                <input type="text" id="suppliername" name="suppliername"  class="form-control" placeholder="suppliername">
+              </div>
+               <div class="col">
+                <input type="number" id="landlineno" name="landlineno"  class="form-control" placeholder="landlineno">
+              </div>
+               <div class="col">
+                <input type="number" id="mobileno" name="mobileno"  class="form-control" placeholder="mobileno">
+              </div>
+               <div class="col">
+                <input type="email" id="email" name="email"  class="form-control" placeholder="email">
+              </div>
+             </div>
+
+      <div class="row gap">
+          <div class="col">
+              <input type="text" id="address" name="address" class="form-control" placeholder="address">
+          </div>
+
+          <div class="col">
+              <input type="text" id="state" name="state" class="form-control" placeholder="state">
+          </div>
+
+          <div class="col">
+              <input type="text" id="city" name="city" class="form-control" placeholder="city">
+          </div>
+      </div>
+       <div class="row gap">
+              <div class="col btnstyle" >
+           <button type="submit" name="btn" value="Edit" class="btn btn-primary w-100" >Edit</button>
+
+                  </div>
+
+              <div class="col btnstyle" >
+            <button type="submit" name="btn" value="Delete" class="btn btn-primary w-100">Delete</button>
+                  </div>
+       </div>
+
+        <div class="row gap">
+              <div class="col btnstyle" style="font-size: 18px;font-weight:bold;">
+                        {{msg}}
+              </div>
+            </div>
+
+</div>
+</div>
+         </form>
+
+</div>
+  </div>
+  <button class = "modal-close is-large" aria-label = "close"></button>
+</div>
+
+      <script>
+      function setDATA(data)
+      {
+             data=data.replace("(","")
+            data=data.replace(")","")
+            data=data.replaceAll("'","")
+            data=data.split(",")
+         return data
+      }
+         $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            var data=$(this).attr('data')
+                 data=setDATA(data)
+             $('#supplierid').val(data[0].trim())
+            $('#supplierid').val(data[1].trim())
+            $('#suppliername').val(data[2].trim())
+            $('#landlineno').val(data[3].trim())
+            $('#mobileno').val(data[4].trim())
+            $('#email').val(data[5].trim())
+            $('#address').val(data[6].trim())
+            $('#state').val(data[7].trim())
+            $('#city').val(data[8].trim())
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+      </script>
+</body>
+</html>
+</html>

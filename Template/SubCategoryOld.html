@@ -1,0 +1,86 @@
+<style type="text/css">
+ .root{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   background-color: #dfe6e9;
+   padding: 20px;
+ }
+ .myframe{
+   width:600px;
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 10px;
+  }
+ .gap{
+     margin-top: 10px;
+ }
+ .btnstyle{
+  display:flex; justify-content:center; align-items:center; widht:20px;
+ }
+ </style>
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/javascript/category.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Material Management</title>
+
+</head>
+<body style="background:#dfe6e9">
+<form action="/SubCategorySubmit" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+  <div class="root">
+   <div class="myframe">
+       <div class="row" style=" display:flex;align-items:center;font-size:14px;letter-spacing:4px;font-weight: bold; padding-left: 25px;margin-bottom: 10px;">
+               <img src="/static/AMD.jpg" width="60">
+               Ryzen
+           </div>
+         <div class="row " >
+             <div class="col">
+             <select id="categoryid" name="categoryid" class="form-control" >
+                <option>-select category</option>
+                 </select>
+                 </div>
+             </div>
+       <div class="row ">
+             <div class="col">
+                <input type="text" name="subcategoryname" class="form-control" placeholder="subcategoryname">
+              </div>
+             </div>
+       <div class="row ">
+             <div class="col">
+                <input type="text" name="description" class="form-control" placeholder="description">
+              </div>
+             </div>
+
+           <div class="row ">
+              <div class="col">
+                <input type="File" name="Icon"  accept="image/*" class="form-control" placeholder="icon">
+                 &nbsp; &nbsp;<img src="/static/noimage.png" id="pic" width="40"/>
+              </div>
+           </div>
+       <div class="row gap">
+              <div class="col btnstyle" >
+           <button type="submit" class="btn btn-primary w-100" >Save</button>
+
+                  </div>
+
+              <div class="col btnstyle" >
+            <button type="reset" class="btn btn-primary w-100">Reset</button>
+                  </div>
+       </div>
+
+        <div class="row gap">
+              <div class="col btnstyle" style="font-size: 18px;font-weight:bold;">
+                        {{msg}}
+              </div>
+            </div>
+   </div>
+  </div>
+</form>
+</body>
+</html>
